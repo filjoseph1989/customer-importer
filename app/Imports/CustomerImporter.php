@@ -18,44 +18,46 @@ class CustomerImporter implements DataImporterInterface
      */
     public function import(array $data)
     {
-        if (isset($data["results"])) {
-            foreach ($data["results"] as $customer) {
-                if (self::validCustomer($customer)) {
-                    $entityManager = app(EntityManager::class);
-                    $customerRepository = $entityManager->getRepository(Customer::class);
-                    $existingCustomer = $customerRepository->findOneBy(['email' => $customer['email']]);
+        if (!isset($data["results"])) {
+            return;
+        }
 
-                    if (is_null($existingCustomer)) {
-                        $newCustomer = new Customer;
-                        $newCustomer->setGender($customer['gender']);
-                        $newCustomer->setFirst($customer['name']['first']);
-                        $newCustomer->setLast($customer['name']['last']);
-                        $newCustomer->setEmail($customer['email']);
-                        $newCustomer->setUsername($customer['login']['username']);
-                        $newCustomer->setPassword(md5($customer['login']['password']));
-                        $newCustomer->setCity($customer['location']['city']);
-                        $newCustomer->setCountry($customer['location']['country']);
-                        $newCustomer->setPhone($customer['phone']);
+        foreach ($data["results"] as $customer) {
+            if (self::validCustomer($customer)) {
+                $entityManager = app(EntityManager::class);
+                $customerRepository = $entityManager->getRepository(Customer::class);
+                $existingCustomer = $customerRepository->findOneBy(['email' => $customer['email']]);
 
-                        $entityManager->persist($newCustomer);
-                        $entityManager->flush();
-                        if (!in_array(env('APP_ENV'), ['test', 'testing'])) {
-                            Log::info("Successfully added new customer {$customer['email']}", [get_class($this)]);
-                        }
-                    } else {
-                        $existingCustomer->setEmail($customer['email']);
-                        $entityManager->persist($existingCustomer);
-                        $entityManager->flush();
-                        if (!in_array(env('APP_ENV'), ['test', 'testing'])) {
-                            Log::info("Successfully updated new customer {$customer['email']}", [get_class($this)]);
-                        }
-                    }
+                if (is_null($existingCustomer)) {
+                    $newCustomer = new Customer;
+                    $newCustomer->setGender($customer['gender']);
+                    $newCustomer->setFirst($customer['name']['first']);
+                    $newCustomer->setLast($customer['name']['last']);
+                    $newCustomer->setEmail($customer['email']);
+                    $newCustomer->setUsername($customer['login']['username']);
+                    $newCustomer->setPassword(md5($customer['login']['password']));
+                    $newCustomer->setCity($customer['location']['city']);
+                    $newCustomer->setCountry($customer['location']['country']);
+                    $newCustomer->setPhone($customer['phone']);
 
-                } else {
-                    $email = isset($customer['email']) ? $customer['email'] : '';
+                    $entityManager->persist($newCustomer);
+                    $entityManager->flush();
                     if (!in_array(env('APP_ENV'), ['test', 'testing'])) {
-                        Log::info("Failed to add new customer {$email}", [get_class($this)]);
+                        Log::info("Successfully added new customer {$customer['email']}", [get_class($this)]);
                     }
+                } else {
+                    $existingCustomer->setEmail($customer['email']);
+                    $entityManager->persist($existingCustomer);
+                    $entityManager->flush();
+                    if (!in_array(env('APP_ENV'), ['test', 'testing'])) {
+                        Log::info("Successfully updated new customer {$customer['email']}", [get_class($this)]);
+                    }
+                }
+
+            } else {
+                $email = isset($customer['email']) ? $customer['email'] : '';
+                if (!in_array(env('APP_ENV'), ['test', 'testing'])) {
+                    Log::info("Failed to add new customer {$email}", [get_class($this)]);
                 }
             }
         }
