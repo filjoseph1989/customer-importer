@@ -38,9 +38,32 @@ and the two segments available are
     GET /customers
     GET /customers/{customersId}
 
-so to test, used API client and make a request like
+so to test, used API client and make a request like to get all customers
 
     /api/v1/customers
+
+Example result will be
+
+    {
+        "data": [
+            {
+                "full_name": "Clarence Daniels",
+                "email": "clarence.daniels@example.com",
+                "country": "Australia"
+            },
+            {
+                "full_name": "Dwight King",
+                "email": "dwight.king@example.com",
+                "country": "Australia"
+            },
+
+            ...
+        ],
+        "_links": {
+            "self": "http://localhost:8000/api/v1/customers",
+            "show": "http://localhost:8000/api/v1/customers/{customersId}"
+        }
+    }
 
 ## Testing
 
