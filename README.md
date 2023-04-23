@@ -38,6 +38,10 @@ and the two segments available are
     GET /customers
     GET /customers/{customersId}
 
+so to test, used API client and make a request like
+
+    /api/v1/customers
+
 ## Testing
 
 Before running the unit test, make sure that below is set in the env
