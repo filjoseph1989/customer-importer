@@ -27,7 +27,7 @@ Next, run the command
 
     php artisan import:customers
 
-# Testing
+## Testing
 
 Before running the unit test, make sure that below is set in the env
 
