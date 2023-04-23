@@ -37,7 +37,7 @@ Run the command
 
     vendor/bin/phpunit
 
-File tha contains test cases
+File that contains test cases
 
     tests/FetchCustomerTest.php
 
