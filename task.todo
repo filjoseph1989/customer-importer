@@ -1,0 +1,47 @@
+Major Functions:
+    ✔ Create a scheduled running the function to fetch the users data from https://randomuser.me/api @done(23-04-23 15:59)
+    ✔ Create an endpoint with POST http method that can accept users data in json format. @done(23-04-23 16:47)
+    ✔ In any of the method above, store the data to database, in table customers. @done(23-04-23 16:01)
+        Customers:
+            ✔ When saving the password of the customer hash it using md5 @done(23-04-23 16:01)
+
+    ✔ Display the list of customers in the database @done(23-04-23 17:29)
+    ✔ Select and display specific users from the database @done(23-04-23 17:29)
+    ✔ The task should only store information needed for the task which is CUSTOMER's information. @done(23-04-23 17:29)
+    ✔ In feature test make sure to use fake test data @done(23-04-23 18:45)
+    ☐ The code must in GitHub repository
+
+Important to remember:
+    ✔ Atleast 100 records @done(23-04-23 18:45)
+    ✔ Use SQL type database @done(23-04-23 18:45)
+    ✔ Table name: Customers @done(23-04-23 18:45)
+    ✔ Only import customers that is Australian nationality @done(23-04-23 18:45)
+    ✔ There should be an importer service so that it can be reusable anywhere @done(23-04-23 18:45)
+    ✔ The designed of the importer should replace with other implementation @done(23-04-23 18:45)
+    ✔ It should be implemented in console command @done(23-04-23 18:46)
+    ✔ If the data providers return the same customer but there are new data in it, update the record @done(23-04-23 19:11)
+
+Specific Requiremens:
+    ✔ Two endponts @done(23-04-23 18:46)
+        ✔ GET, /customers @done(23-04-23 18:46)
+        ✔ GET, /customers/{customersId} @done(23-04-23 18:46)
+
+Tips:
+    ✔ Please ensure quality and clean codes- strictly follow OOP and SOLID Principles (Quality code means that the codes created must be well structured and testable) @done(23-04-23 19:11)
+    ✔ For the PHP Framework, you may choose between Laravel/ Symfony. @done(23-04-23 19:11)
+    ✔ Make sure that the Database layer is in Doctrine/ Laravel doctrine. @done(23-04-23 19:11)
+    ✔ Save your work in your GitHub account then send me the link. @done(23-04-23 19:11)
+    ✔ Please make sure to follow the instructions in the test material. @done(23-04-23 19:11)
+    ✔ Test your code (PHP Unit)- this is nice to have. @done(23-04-23 19:11)
+    ✔ Proper use of dependency injection. @done(23-04-23 19:11)
+    ✔ Avoid using façade or static. @done(23-04-23 19:11)
+    ✔ Avoid too many unused methods. @done(23-04-23 19:11)
+    ✔ Avoid too much code boilerplate which means unused code. @done(23-04-23 19:11)
+
+Specifics:
+    ✔ Todo-3 [inline] Please correct the message in this line @done(23-04-23 19:12)
+    ✔ Todo-2 [inline] In this line, it was assume that no issue with customer imports, add new method that can report if trully successfull @done(23-04-23 16:53)
+    ✔ Todo-1 [inline] In this line, you can see email is being save in database, make sure email is unique @done(23-04-23 15:52)
+
+Next:
+    ✔ Move the doctrine implementation to a package @done(23-04-23 15:50)

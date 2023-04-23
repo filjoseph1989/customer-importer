@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\CustomerController;
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
@@ -16,3 +17,13 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->get('/api/v1/customers', [
+    'as' => 'list-imported-customer',
+    'uses' => 'CustomerController@index'
+]);
+
+$router->get('/api/v1/customers/{customersId}', [
+    'as' => 'show-import-customer',
+    'uses' => 'CustomerController@show'
+]);

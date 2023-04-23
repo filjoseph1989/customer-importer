@@ -3,18 +3,17 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\Entity;
-use Doctrine\ORM\Mapping\Table;
+use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 
-#[Entity]
-#[Table(name: 'customers')]
-class Customers
+#[ORM\Entity]
+#[ORM\Table(name: 'customers')]
+class Customer
 {
 	#[ORM\Id]
-	#[Column(type: 'integer')]
-	#[GeneratedValue]
-	private int|null $id=null;
+	#[ORM\Column, GeneratedValue]
+	private int $id;
 
 	#[Column(type: Types::STRING)]
 	private string $first;
@@ -228,6 +227,15 @@ class Customers
 	public function setCountry($country): self
     {
 		$this->country = $country;
+		return $this;
+	}
+
+	/**
+	 * @param int|null $id
+	 * @return self
+	 */
+	public function setId(int|null $id): self {
+		$this->id = $id;
 		return $this;
 	}
 }
