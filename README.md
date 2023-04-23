@@ -1,6 +1,6 @@
 # Flexisource Importer API
 
-Flexisource API is a RESTful API that utilizes the Lumen framework and Doctrine to import customers from external resources. It provides a simple and straightforward implementation of the API, allowing for easy integration with other systems.Flexisource api is a simple implementation of RESTul api that use lumen framework and doctrine to import customers from external resource
+Flexisource API is a RESTful API that utilizes the Lumen framework and Doctrine to import customers from external resources. It provides a simple and straightforward implementation of the API, allowing for easy integration with other systems.
 
 ## Installation
 
