@@ -10,7 +10,7 @@ Next, run migration using
 
     php artisan migrate
 
-Next, set youe preferred database connection in the .env
+Next, set your preferred database connection in the .env
 
     DB_DRIVER=pdo_pgsql
     DB_CONNECTION=pgsql
