@@ -41,6 +41,12 @@ File that contains test cases
 
     tests/FetchCustomerTest.php
 
+See videos
+
+    https://youtu.be/GViO8aVn608 <br>
+    https://youtu.be/-n3y_-unO7s - running the feature test
+
+
 # Creator
 
 Fil Joseph Elman <br>
