@@ -27,6 +27,17 @@ Next, run the command
 
     php artisan import:customers
 
+## Endpoints
+
+This implementation has two available endpoints, the base endpoint or prefix
+
+    /api/v1
+
+and the two segments available are
+
+    GET /customers
+    GET /customers/{customersId}
+
 ## Testing
 
 Before running the unit test, make sure that below is set in the env
