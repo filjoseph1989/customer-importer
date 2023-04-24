@@ -64,14 +64,10 @@ class CustomerImporter implements DataImporterInterface
                     $message = "An error occurred while saving customer";
                 }
 
-                if (!in_array(env('APP_ENV'), ['test', 'testing'])) {
-                    Log::info("{$message} {$customer['email']}", [get_class($this)]);
-                }
+                $this->log("{$message} {$customer['email']}");
             } else {
                 $email = isset($customer['email']) ? $customer['email'] : '';
-                if (!in_array(env('APP_ENV'), ['test', 'testing'])) {
-                    Log::info("Failed to add/update new customer {$email}", [get_class($this)]);
-                }
+                $this->log("Failed to add/update new customer {$email}");
             }
         }
     }
@@ -107,5 +103,18 @@ class CustomerImporter implements DataImporterInterface
         }
 
         return true;
+    }
+
+    /**
+     * Handle logging
+     *
+     * @param string $message
+     * @return void
+     */
+    private function log(string $message): void
+    {
+        if (!in_array(env('APP_ENV'), ['test', 'testing'])) {
+            Log::info($message, [get_class($this)]);
+        }
     }
 }
