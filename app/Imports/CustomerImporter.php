@@ -23,7 +23,7 @@ class CustomerImporter implements DataImporterInterface
         }
 
         $entityManager = app(EntityManager::class);
-        
+
         foreach ($data["results"] as $customer) {
             if (self::validCustomer($customer)) {
                 $customerRepository = $entityManager->getRepository(Customer::class);
@@ -42,23 +42,35 @@ class CustomerImporter implements DataImporterInterface
                     $newCustomer->setPhone($customer['phone']);
 
                     $entityManager->persist($newCustomer);
-                    $entityManager->flush();
-                    if (!in_array(env('APP_ENV'), ['test', 'testing'])) {
-                        Log::info("Successfully added new customer {$customer['email']}", [get_class($this)]);
-                    }
                 } else {
                     $existingCustomer->setEmail($customer['email']);
                     $entityManager->persist($existingCustomer);
-                    $entityManager->flush();
-                    if (!in_array(env('APP_ENV'), ['test', 'testing'])) {
-                        Log::info("Successfully updated new customer {$customer['email']}", [get_class($this)]);
-                    }
                 }
 
+                // Update/Create table customers
+                $entityManager->flush();
+
+                if (is_null($existingCustomer)) {
+                    $state = $entityManager->getUnitOfWork()->getEntityState($newCustomer);
+                } else {
+                    $state = $entityManager->getUnitOfWork()->getEntityState($existingCustomer);
+                }
+
+                assert($state == 1, "Failed to assert that saving state for customer is success");
+
+                if ($state == 1) {
+                    $message = "Successfully saved customer";
+                } else {
+                    $message = "An error occurred while saving customer";
+                }
+
+                if (!in_array(env('APP_ENV'), ['test', 'testing'])) {
+                    Log::info("{$message} {$customer['email']}", [get_class($this)]);
+                }
             } else {
                 $email = isset($customer['email']) ? $customer['email'] : '';
                 if (!in_array(env('APP_ENV'), ['test', 'testing'])) {
-                    Log::info("Failed to add new customer {$email}", [get_class($this)]);
+                    Log::info("Failed to add/update new customer {$email}", [get_class($this)]);
                 }
             }
         }
