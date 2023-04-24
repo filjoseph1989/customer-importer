@@ -9,7 +9,7 @@ Major Functions:
     ✔ Select and display specific users from the database @done(23-04-23 17:29)
     ✔ The task should only store information needed for the task which is CUSTOMER's information. @done(23-04-23 17:29)
     ✔ In feature test make sure to use fake test data @done(23-04-23 18:45)
-    ☐ The code must in GitHub repository
+    ✔ The code must in GitHub repository @done(23-04-23 20:52)
 
 Important to remember:
     ✔ Atleast 100 records @done(23-04-23 18:45)

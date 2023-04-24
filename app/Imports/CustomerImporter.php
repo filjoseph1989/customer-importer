@@ -22,9 +22,10 @@ class CustomerImporter implements DataImporterInterface
             return;
         }
 
+        $entityManager = app(EntityManager::class);
+        
         foreach ($data["results"] as $customer) {
             if (self::validCustomer($customer)) {
-                $entityManager = app(EntityManager::class);
                 $customerRepository = $entityManager->getRepository(Customer::class);
                 $existingCustomer = $customerRepository->findOneBy(['email' => $customer['email']]);
 
