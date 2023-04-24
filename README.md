@@ -6,6 +6,10 @@ Flexisource API is a RESTful API that utilizes the Lumen framework and Doctrine 
 
 For installation just follow the official guidelines from Lumen documentation [Lumen](https://lumen.laravel.com/docs/10.x/installation)
 
+Then serve
+
+    php -S localhost:8000 -t public
+
 Next, run migration using
 
     php artisan migrate
